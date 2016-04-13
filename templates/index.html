@@ -16,7 +16,21 @@
     <form action="/todolist" method="post">
     <input type="text" name="todo"></input>
     <input type="submit" value="Enter Todo Item"></input>
+
+    <select name="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+    </select>
     </form>
+
+  <p>Current Todo List Items:</p>
+    <ul>
+      {% for item in todoList %}
+      <li> Task: {{ item[0] }} | Priority: {{ item[1] }}</li>
+      {% endfor %}
+    </ul>
+    <p>Let's Get to Work!</p>
 
   </body>
 </html>

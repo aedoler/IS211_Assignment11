@@ -8,16 +8,16 @@ todoList = []
 @app.route('/')
 def hello_world():
 
-    return render_template('index.html')
+    return render_template('index.html', todoList = todoList)
 
 @app.route('/todolist', methods = ['POST'])
 def signup():
     email = request.form['todo']
-    todoList.append(email)
-    for email1 in todoList:
-        print 'Entered:{} '.format(email1)
+    priority = request.form['priority']
+    todoList.append((email, priority))
+    for item in todoList:
+        print 'Entered: {}, with a priority of {} '.format(item[0], item[1])
     return redirect('/')
-
 
 
 
