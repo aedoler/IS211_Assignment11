@@ -12,11 +12,13 @@ def hello_world():
 
 @app.route('/todolist', methods = ['POST'])
 def signup():
-    email = request.form['todo']
+    task = request.form['todo']
+    email = request.form['email']
     priority = request.form['priority']
-    todoList.append((email, priority))
+
+    todoList.append((task, email, priority))
     for item in todoList:
-        print 'Entered: {}, with a priority of {} '.format(item[0], item[1])
+        print 'Entered: {}, for Email: {},  with a priority of {} '.format(item[0], item[1], item[2])
     return redirect('/')
 
 
