@@ -26,8 +26,7 @@ def submit():
     email = request.form['email']
     priority = request.form['priority']
 
-
-    if not re.search('(@)', email):
+    if not re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email):
         return render_template('error.html', methods = ['POST'])
 
     if os.path.exists('todolist.pkl'):
