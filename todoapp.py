@@ -28,8 +28,7 @@ def submit():
 
 
     if not re.search('(@)', email):
-        print 'Please enter a valid email address'
-        signup()
+        return render_template('error.html', methods = ['POST'])
 
     if os.path.exists('todolist.pkl'):
         filehandler = open('todolist.pkl', 'rb')
@@ -46,6 +45,13 @@ def submit():
     filehandler.close()
 
     return redirect('/')
+
+"""
+@app.errorhandler('/error', methods = ['POST'])
+def errorhandler():
+
+    return render_template('error.html', ) """
+
 
 
 
