@@ -15,7 +15,7 @@ h2 {
 
 
   <body>
-  <h2>Please enter a valid email!</h2>
+  <h2>Please enter a valid {{errorvalue}}</h2>
 
     <div id="emailform">
 
@@ -34,6 +34,7 @@ h2 {
         <option value="high">High</option>
         <option value="medium">Medium</option>
         <option value="low">Low</option>
+        <option value="none">None</option> <!--This is only added to test valid input as indicated in assignment instructions-->
     </select>
 
         <input type="submit" value="Add To Do Item"></input>
@@ -46,6 +47,11 @@ h2 {
       {% endfor %}
     </ul>
     <p>Let's Get to Work!</p>
+
+    <form action="/clear" method="post">
+      Clear list?
+      <input type="submit" value="Clear"></input>
+  </form>
 
   </body>
 </html>

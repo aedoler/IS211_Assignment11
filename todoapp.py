@@ -26,10 +26,15 @@ def submit():
     email = request.form['email']
     priority = request.form['priority']
 
-    if not re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email):
-        return render_template('error.html', methods = ['POST'])
+    if not re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email): #Checks for correct email
+        errorvalue = 'email address!'
+        return render_template('error.html', methods = ['POST'], errorvalue = errorvalue )
+    elif not re.search('(high|medium|low)', priority): #Added value "none" in html to test this
+        errorvalue = 'priority!'
+        return render_template('error.html', methods = ['POST'], errorvalue = errorvalue )
 
-    if os.path.exists('todolist.pkl'):
+
+    if os.path.exists('todolist.pkl'): #Checks if file exists so as to not overwrite it
         filehandler = open('todolist.pkl', 'rb')
         todoList = pickle.load(filehandler)
         filehandler.close()
@@ -45,14 +50,15 @@ def submit():
 
     return redirect('/')
 
-"""
-@app.errorhandler('/error', methods = ['POST'])
-def errorhandler():
 
-    return render_template('error.html', ) """
+@app.route('/clear', methods = ['POST']) #So far, this functions DOES delete the list, however I it does not refresh the list
+def clear():                             #on the screen until you restart the app, which start with a cleared list.
 
-
-
+    todoList = [] # Deletes content in list
+    filehandler = open('todolist.pkl', 'wb')
+    pickle.dump(todoList, filehandler)
+    filehandler.close()
+    return redirect('/')
 
 
 if __name__ == "__main__":
