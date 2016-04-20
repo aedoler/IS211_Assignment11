@@ -48,9 +48,8 @@ def submit():
     return redirect('/')
 
 
-@app.route('/clear', methods = ['GET', 'POST']) #So far, this functions DOES delete the list, however I it does not refresh the list
-def clear():                             #on the screen until you restart the app, which start with a cleared list.
-
+@app.route('/clear', methods = ['GET', 'POST'])
+def clear():
     todoList = [] # Deletes content in list
     filehandler = open('todolist.pkl', 'wb')
     pickle.dump(todoList, filehandler)
